@@ -1,6 +1,8 @@
 package pl.desz.vehiclemarket.vehicle;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import pl.desz.vehiclemarket.person.Person;
 
@@ -26,8 +28,11 @@ public class VehicleIndex {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private final LocalDateTime addedDateTime = LocalDateTime.now();
 
-    public VehicleIndex(String mark, String model, boolean used, boolean damaged, BigDecimal price,
-                        String description, Person seller, VehicleType vehicleType) {
+    @JsonCreator
+    public VehicleIndex(@JsonProperty("mark") String mark, @JsonProperty("model") String model,
+                        @JsonProperty("used") boolean used, @JsonProperty("damaged") boolean damaged,
+                        @JsonProperty("price") BigDecimal price, @JsonProperty("description") String description,
+                        @JsonProperty("seller") Person seller, @JsonProperty("vehicleType") VehicleType vehicleType) {
         this.mark = mark;
         this.model = model;
         this.used = used;
