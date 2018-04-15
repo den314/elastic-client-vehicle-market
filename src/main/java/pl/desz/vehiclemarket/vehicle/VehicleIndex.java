@@ -2,7 +2,7 @@ package pl.desz.vehiclemarket.vehicle;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import pl.desz.vehiclemarket.model.Person;
+import pl.desz.vehiclemarket.person.Person;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

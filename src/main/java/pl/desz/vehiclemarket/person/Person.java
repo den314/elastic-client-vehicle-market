@@ -1,4 +1,4 @@
-package pl.desz.vehiclemarket.model;
+package pl.desz.vehiclemarket.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package pl.desz.vehiclemarket.vehicle;
 
-import pl.desz.vehiclemarket.model.Person;
+import pl.desz.vehiclemarket.person.Person;
 
 import java.math.BigDecimal;
 import java.util.Optional;

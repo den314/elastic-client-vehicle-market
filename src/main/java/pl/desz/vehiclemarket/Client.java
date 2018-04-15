@@ -1,14 +1,10 @@
 package pl.desz.vehiclemarket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
 import pl.desz.vehiclemarket.elastic.ElasticClient;
-import pl.desz.vehiclemarket.model.Person;
+import pl.desz.vehiclemarket.person.Person;
 import pl.desz.vehiclemarket.vehicle.VehicleIndex;
 import pl.desz.vehiclemarket.vehicle.VehicleService;
 import pl.desz.vehiclemarket.vehicle.VehicleServiceImpl;
