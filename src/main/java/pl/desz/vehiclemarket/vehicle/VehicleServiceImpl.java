@@ -3,15 +3,20 @@ package pl.desz.vehiclemarket.vehicle;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.rest.RestStatus;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class VehicleServiceImpl implements VehicleService {
 
     public static final String INDEX = "vehicle";
     public static final String TYPE = "vehicle";
+    public static final int TIMEOUT_IN_SECONDS = 10;
 
     private TransportClient client;
     private ObjectMapper mapper;
@@ -31,21 +36,27 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public RestStatus findById(String id) {
-        throw new UnsupportedOperationException("not implemented yet");
+    public Optional<VehicleIndex> findById(String id) {
+        GetResponse doc = client.prepareGet(INDEX, TYPE, id)
+                .get(TimeValue.timeValueSeconds(TIMEOUT_IN_SECONDS));
+        try {
+            return Optional.of(mapper.readValue(doc.getSourceAsString(), VehicleIndex.class));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not parse response JSON.", e);
+        }
     }
 
     @Override
-    public RestStatus save(VehicleIndex vehicleIndex) {
+    public Optional<String> save(VehicleIndex vehicleIndex) {
         IndexResponse indexResponse = client.prepareIndex(INDEX, TYPE)
                 .setSource(convertToJson(vehicleIndex), XContentType.JSON)
-                .get();
+                .get(TimeValue.timeValueSeconds(TIMEOUT_IN_SECONDS));
 
-        return indexResponse.status();
+        return Optional.ofNullable(indexResponse.getId());
     }
 
     @Override
-    public RestStatus update(VehicleIndex vehicleIndex) {
+    public boolean update(VehicleIndex vehicleIndex) {
         throw new UnsupportedOperationException("not implemented yet");
     }
 

@@ -1,11 +1,11 @@
 package pl.desz.vehiclemarket.vehicle;
 
-import org.elasticsearch.rest.RestStatus;
+import java.util.Optional;
 
 public interface VehicleService {
 
-    RestStatus findById(String id);
-    RestStatus save(VehicleIndex vehicleIndex);
-    RestStatus update(VehicleIndex vehicleIndex);
+    Optional<VehicleIndex> findById(String id);
+    Optional<String> save(VehicleIndex vehicleIndex);
+    boolean update(VehicleIndex vehicleIndex);
     boolean delete(VehicleIndex vehicleIndex);
 }
