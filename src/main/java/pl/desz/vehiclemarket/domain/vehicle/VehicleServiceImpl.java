@@ -63,6 +63,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public boolean update(VehicleIndex vehicleIndex) {
         UpdateResponse response = client.prepareUpdate(INDEX, TYPE, vehicleIndex.getId())
+                .setDoc(vehicleIndex)
                 .get();
         return response.status() == RestStatus.OK;
     }
