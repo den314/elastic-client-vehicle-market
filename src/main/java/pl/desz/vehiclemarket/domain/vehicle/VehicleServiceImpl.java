@@ -1,13 +1,18 @@
-package pl.desz.vehiclemarket.vehicle;
+package pl.desz.vehiclemarket.domain.vehicle;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.elasticsearch.action.delete.DeleteRequestBuilder;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.rest.RestStatus;
+import sun.security.provider.certpath.OCSPResponse;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -57,12 +62,18 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public boolean update(VehicleIndex vehicleIndex) {
-        throw new UnsupportedOperationException("not implemented yet");
+        UpdateResponse response = client.prepareUpdate(INDEX, TYPE, vehicleIndex.getId())
+                .get();
+        return response.status() == RestStatus.OK;
     }
 
     @Override
     public boolean delete(VehicleIndex vehicleIndex) {
-        throw new UnsupportedOperationException("not implemented yet");
+
+        DeleteResponse response = client.prepareDelete(INDEX, TYPE, vehicleIndex.getId())
+                .get();
+
+        return response.status() == RestStatus.OK;
     }
 
     private String convertToJson(VehicleIndex vehicle) {

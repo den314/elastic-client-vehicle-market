@@ -1,12 +1,13 @@
-package pl.desz.vehiclemarket.vehicle;
+package pl.desz.vehiclemarket.domain.vehicle;
 
-import pl.desz.vehiclemarket.person.Person;
+import pl.desz.vehiclemarket.domain.person.Person;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 public class VehicleBuilder {
 
+    private String id;
     private String mark;
     private String model;
     private String mileage;
@@ -26,14 +27,35 @@ public class VehicleBuilder {
 
     public Optional<VehicleIndex> build() {
         boolean valid = areMandatoryFieldsSet();
-        return valid ? Optional.of(new VehicleIndex(this.mark, this.model, this.used, this.damaged, this.price, this.description, this.seller, this.vehicleType))
+        return valid ? Optional.of(new VehicleIndex(this.id, this.mark, this.model, this.used, this.damaged, this.price, this.description, this.seller, this.vehicleType))
                 : Optional.empty();
     }
 
     private boolean areMandatoryFieldsSet() {
-        return this.model != null && this.mark != null && !this.usedNotSet && !this.damagedNotSet
+
+        return this.id != null && this.model != null && this.mark != null && !this.usedNotSet && !this.damagedNotSet
                 && this.price != null && this.description != null && !this.description.trim().isEmpty() && this.seller != null
                 && this.vehicleType != null;
+    }
+
+    public VehicleBuilder setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public VehicleBuilder setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+        return this;
+    }
+
+    public VehicleBuilder setUsedNotSet(boolean usedNotSet) {
+        this.usedNotSet = usedNotSet;
+        return this;
+    }
+
+    public VehicleBuilder setDamagedNotSet(boolean damagedNotSet) {
+        this.damagedNotSet = damagedNotSet;
+        return this;
     }
 
     public VehicleBuilder setMark(String mark) {

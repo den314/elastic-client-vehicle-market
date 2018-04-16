@@ -1,4 +1,4 @@
-package pl.desz.vehiclemarket.person;
+package pl.desz.vehiclemarket.domain.person;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

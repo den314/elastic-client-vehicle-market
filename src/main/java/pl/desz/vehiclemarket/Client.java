@@ -3,11 +3,11 @@ package pl.desz.vehiclemarket;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.elasticsearch.client.transport.TransportClient;
 import pl.desz.vehiclemarket.elastic.ElasticClient;
-import pl.desz.vehiclemarket.person.Person;
-import pl.desz.vehiclemarket.vehicle.VehicleIndex;
-import pl.desz.vehiclemarket.vehicle.VehicleService;
-import pl.desz.vehiclemarket.vehicle.VehicleServiceImpl;
-import pl.desz.vehiclemarket.vehicle.VehicleType;
+import pl.desz.vehiclemarket.domain.person.Person;
+import pl.desz.vehiclemarket.domain.vehicle.VehicleIndex;
+import pl.desz.vehiclemarket.domain.vehicle.VehicleService;
+import pl.desz.vehiclemarket.domain.vehicle.VehicleServiceImpl;
+import pl.desz.vehiclemarket.domain.vehicle.VehicleType;
 
 import java.math.BigDecimal;
 import java.net.UnknownHostException;
