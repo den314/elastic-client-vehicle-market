@@ -23,7 +23,7 @@ public class Client {
     private static void saveAndFind() throws UnknownHostException {
         TransportClient tc = ElasticClient.getClient("192.168.99.100", 9300);
 
-        VehicleIndex vehicleIndex = new VehicleIndex("opel", "astra", true,
+        VehicleIndex vehicleIndex = new VehicleIndex("1", "opel", "astra", true,
                 false, new BigDecimal(9500d), "cool car, buy it",
                 new Person("denis", "den", "123456"), VehicleType.CAR);
 
