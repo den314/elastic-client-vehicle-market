@@ -9,6 +9,9 @@ import pl.desz.vehiclemarket.domain.person.Person;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Index in Elasticsearch, stores all data related to the Vehicle.
+ */
 @Data
 public class VehicleIndex {
 

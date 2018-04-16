@@ -5,6 +5,12 @@ import pl.desz.vehiclemarket.domain.person.Person;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+/**
+ * Alternative creation of Vehicle instance through
+ * its Builder class. Preserves mandatory fields.
+ * If some are not set {@link #areMandatoryFieldsSet()}
+ * will return false.
+ */
 public class VehicleBuilder {
 
     private String id;

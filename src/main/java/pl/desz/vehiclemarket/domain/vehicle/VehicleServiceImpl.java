@@ -17,10 +17,19 @@ import sun.security.provider.certpath.OCSPResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Provides CRUD and search functionalities for
+ * a {@link VehicleIndex}. Interacts with Elasticsearch
+ * through its Java Client API.
+ */
 public class VehicleServiceImpl implements VehicleService {
 
     public static final String INDEX = "vehicle";
     public static final String TYPE = "vehicle";
+
+    /**
+     * Maximum timeout in seconds after which request should fail.
+     */
     public static final int TIMEOUT_IN_SECONDS = 10;
 
     private TransportClient client;
@@ -64,19 +73,23 @@ public class VehicleServiceImpl implements VehicleService {
     public boolean update(VehicleIndex vehicleIndex) {
         UpdateResponse response = client.prepareUpdate(INDEX, TYPE, vehicleIndex.getId())
                 .setDoc(vehicleIndex)
-                .get();
+                .get(TimeValue.timeValueSeconds(TIMEOUT_IN_SECONDS));
         return response.status() == RestStatus.OK;
     }
 
     @Override
     public boolean delete(VehicleIndex vehicleIndex) {
-
         DeleteResponse response = client.prepareDelete(INDEX, TYPE, vehicleIndex.getId())
-                .get();
+                .get(TimeValue.timeValueSeconds(TIMEOUT_IN_SECONDS));
 
         return response.status() == RestStatus.OK;
     }
 
+    /**
+     * Serializes vehicleIndex to JSON.
+     * @param vehicle object which must be serialized to json
+     * @return string representing given object
+     */
     private String convertToJson(VehicleIndex vehicle) {
         try {
             return mapper.writeValueAsString(vehicle);
